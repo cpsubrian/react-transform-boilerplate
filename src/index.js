@@ -11,3 +11,11 @@ React.render((
     {() => <App />}
   </Provider>
 ), document.getElementById('root'));
+
+if (module.hot) {
+  // Enable Webpack hot module replacement for reducers
+  module.hot.accept('./reducer', () => {
+    const {reducer: nextReducer} = require('./reducer');
+    store.replaceReducer(nextReducer);
+  });
+}
